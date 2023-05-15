@@ -1,4 +1,4 @@
-import "@/styles/globals.css";
+import "@/styles/globals.scss";
 import type { AppProps } from "next/app";
 import { MantineProvider } from "@mantine/core";
 import { NextPage } from "next";
@@ -6,6 +6,7 @@ import { ReactElement } from "react";
 import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";
 import AuthGuard from "@/components/auth/AuthGuard";
+import { modals } from "@/utils/modals/modals";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => JSX.Element;
@@ -27,7 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
           colorScheme: "light",
         }}
       >
-        <ModalsProvider modals={{}}>
+        <ModalsProvider modals={modals}>
           <AuthGuard Component={Component} pageProps={pageProps} />
         </ModalsProvider>
         <Notifications />

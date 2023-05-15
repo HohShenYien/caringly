@@ -4,7 +4,7 @@ import { Image } from "@mantine/core";
 
 const Hero = () => {
   return (
-    <Section className="bg-rose-100/10 pt-16">
+    <Section className="bg-rose-100/25 pt-16">
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-4 py-20">
           <div className="space-y-2">

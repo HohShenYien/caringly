@@ -1,4 +1,6 @@
+import Footer from "@/components/footers/Footer";
 import Hero from "@/features/Landing/Hero";
+import HowItWorks from "@/features/Landing/HowItWorks";
 import Stats from "@/features/Landing/Stats";
 
 export default function Home() {
@@ -6,6 +8,8 @@ export default function Home() {
     <div>
       <Hero />
       <Stats />
+      <HowItWorks />
+      <Footer />
     </div>
   );
 }
