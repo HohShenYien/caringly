@@ -21,6 +21,8 @@ const Button = ({ children, variant = "filled", ...props }: ButtonProps) => {
           variant == "outline",
         "text-indigo-500 hover:text-indigo-600 hover:underline active:text-indigo-700":
           variant == "link",
+        "border-none bg-transparent text-indigo-500 hover:bg-indigo-100 hover:text-indigo-600 active:bg-indigo-200":
+          variant == "default",
       })}
       variant={variant}
       classNames={{ root: "!h-[unset]", label: "py-1" }}

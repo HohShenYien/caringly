@@ -10,11 +10,11 @@ const AppLayout = ({ children }: DefaultLayoutProps) => {
     <div className="bg-gray-50/50">
       <div
         id="background-image"
-        className="absolute bottom-0 left-0 right-0 top-0 opacity-5"
+        className="absolute bottom-0 left-0 right-0 top-0 opacity-10"
         style={{ backgroundImage: "url(/img/background.png)" }}
       ></div>
       <Sidebar />
-      <main className="relative ml-72 flex h-screen justify-center px-12 py-4">
+      <main className="relative ml-80 flex h-screen justify-center px-8 py-4">
         {children}
       </main>
     </div>

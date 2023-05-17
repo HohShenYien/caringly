@@ -1,10 +1,18 @@
 import useSession from "@/features/Auth/useSession";
 import { Avatar, TextInput, Tooltip } from "@mantine/core";
-import { AiFillHome, AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
+import {
+  AiFillHome,
+  AiOutlineHome,
+  AiOutlinePlus,
+  AiOutlineSearch,
+} from "react-icons/ai";
 import { RiQrScan2Line, RiQrScanFill } from "react-icons/ri";
-import { BiLogOut } from "react-icons/bi";
+import { BiLogOut, BiQuestionMark } from "react-icons/bi";
 import SidebarNavButton from "@/components/buttons/SidebarNavButton";
 import Button from "@/components/buttons/Button";
+import Logo from "../branding/Logo";
+import { helpModal } from "@/utils/modals/types";
+import openModal from "@/utils/modals/openModal";
 
 const Sidebar = () => {
   const { user } = useSession();
@@ -22,9 +30,25 @@ const Sidebar = () => {
           {user?.username?.charAt(0)}
         </Avatar>
         <div className="flex-1" />
+        <Tooltip label="Help" position="top">
+          <div className="mb-2">
+            <Button
+              variant="default"
+              className="!rounded-md !px-1"
+              onClick={() =>
+                openModal({
+                  type: helpModal,
+                  innerProps: {},
+                })
+              }
+            >
+              <BiQuestionMark size="24" />
+            </Button>
+          </div>
+        </Tooltip>
         <Tooltip label="Logout" position="top">
           <div>
-            <Button variant="subtle" className="!px-2">
+            <Button variant="default" className="!rounded-md !px-1">
               <BiLogOut size="24" />
             </Button>
           </div>
@@ -32,6 +56,10 @@ const Sidebar = () => {
       </div>
       <div className="relative flex max-h-screen flex-1 flex-col overflow-hidden">
         <div className="px-2 py-3">
+          <div className="mb-4 flex items-center justify-center">
+            <Logo size={36} />
+            <h1 className="text-xl font-bold text-indigo-600">aringly</h1>
+          </div>
           <TextInput
             placeholder="Search Account"
             rightSection={<AiOutlineSearch />}
@@ -39,8 +67,10 @@ const Sidebar = () => {
           />
         </div>
 
-        <div className="relative space-y-2 overflow-auto px-2 py-2">
-          <Button>+</Button>
+        <div className="relative flex-1 space-y-2 overflow-auto px-2 py-2">
+          <Button className="fixed bottom-4 left-64 px-1">
+            <AiOutlinePlus size="28" />
+          </Button>
           <SidebarNavButton
             href="/app"
             text="Home"
