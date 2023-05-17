@@ -2,7 +2,6 @@ import Button from "@/components/buttons/Button";
 import Link from "next/link";
 import Logo from "../branding/Logo";
 import { clsx } from "@mantine/core";
-import { useWindowScroll } from "@mantine/hooks";
 import useNavStyles from "./useNavStyles";
 import openModal from "@/utils/modals/openModal";
 import { loginModal, registerModal } from "@/utils/modals/types";
@@ -37,12 +36,17 @@ const Navbar = () => {
           >
             Sign in
           </Button>
-          <Button className="text-lg" onClick={() => {
-            openModal({
-              type: registerModal,
-              innerProps: {}
-            })
-          }}>Register</Button>
+          <Button
+            className="text-lg"
+            onClick={() => {
+              openModal({
+                type: registerModal,
+                innerProps: {},
+              });
+            }}
+          >
+            Register
+          </Button>
         </div>
       </nav>
     </div>

@@ -1,4 +1,4 @@
-import Navbar from "@/components/navbars/Navbar";
+import Navbar from "@/components/nav/Navbar";
 import { ReactElement, ReactNode } from "react";
 
 interface DefaultLayoutProps {

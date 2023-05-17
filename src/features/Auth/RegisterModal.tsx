@@ -42,7 +42,7 @@ const RegisterModal: MantineModal<RegisterModalProps> = () => {
     <ModalLayout padding={false}>
       <div className="grid h-[500px] grid-cols-12">
         <div className="relative col-span-6 h-full">
-          <Image alt="Mountains" src="/support.png" fill />
+          <Image alt="Holding Hands" src="/img/auth/register.png" fill />
         </div>
         <div className="col-span-6 space-y-4 px-6 py-8">
           <h2 className="text-2xl font-semibold">Join Caringly</h2>

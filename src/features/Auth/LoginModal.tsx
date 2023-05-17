@@ -74,7 +74,11 @@ const LoginModal: MantineModal<LoginModalProps> = () => {
         </div>
 
         <div className="relative col-span-6 h-full">
-          <Image alt="Mountains" src="/auth.png" fill />
+          <Image
+            alt="Men supporting each other"
+            src="/img/auth/login.png"
+            fill
+          />
         </div>
       </div>
     </ModalLayout>

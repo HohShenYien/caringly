@@ -5,7 +5,7 @@ const HowItWorksCard = () => {
     <div className="px-4">
       <div className="mb-4 flex flex-col items-center justify-center space-y-2">
         <Image
-          src="/depression.png"
+          src="/img/hero/depression.png"
           height="250"
           width="250"
           alt=""

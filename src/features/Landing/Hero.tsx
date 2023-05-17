@@ -1,6 +1,9 @@
 import Button from "@/components/buttons/Button";
 import Section from "./Section";
 import { Image } from "@mantine/core";
+import openModal from "@/utils/modals/openModal";
+import { registerModal } from "@/utils/modals/types";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -21,14 +24,32 @@ const Hero = () => {
             </p>
           </div>
           <div className="space-x-4">
-            <Button className="text-xl">Get Started</Button>
-            <Button className="text-xl" variant="outline">
+            <Button
+              className="text-xl"
+              onClick={() => {
+                openModal({
+                  type: registerModal,
+                  innerProps: {},
+                });
+              }}
+            >
+              Get Started
+            </Button>
+            <Button
+              className="text-xl"
+              variant="outline"
+              onClick={() => {
+                document.getElementById("how-it-works")?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
+            >
               How it Works
             </Button>
           </div>
         </div>
         <div>
-          <Image src="/hero.png" alt="Hero image" w="100%" />
+          <Image src="/img/hero/hero.png" alt="Hero image" w="100%" />
         </div>
       </div>
     </Section>

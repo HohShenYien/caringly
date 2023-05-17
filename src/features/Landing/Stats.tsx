@@ -16,7 +16,7 @@ const Stats = () => {
             link="https://www.who.int/news-room/fact-sheets/detail/depression"
           />
           <Image
-            src="/depression.png"
+            src="/img/hero/depression.png"
             alt="depression"
             width="320"
             height="320"
@@ -25,7 +25,7 @@ const Stats = () => {
         </div>
         <div className="flex flex-row items-start justify-center">
           <Image
-            src="/suicide.png"
+            src="/img/hero/suicide.png"
             alt="suicide"
             height="400"
             width="480"
