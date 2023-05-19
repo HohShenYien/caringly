@@ -7,7 +7,7 @@ const AppDashboard: NextPageWithLayout = () => {
   return (
     <div>
       <h1 className="mb-4 text-4xl">Home</h1>
-      <div className="space-y-12 pl-8">
+      <div className="flex flex-col items-center space-y-12 pl-8">
         <WatchList />
         <OverviewMetrics />
       </div>

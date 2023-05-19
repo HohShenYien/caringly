@@ -14,7 +14,7 @@ const AppLayout = ({ children }: DefaultLayoutProps) => {
         style={{ backgroundImage: "url(/img/background.png)" }}
       ></div>
       <Sidebar />
-      <main className="relative ml-80 flex h-screen justify-center px-8 py-4">
+      <main className="relative ml-80 flex min-h-screen flex-col items-stretch justify-stretch px-8 py-4">
         {children}
       </main>
     </div>

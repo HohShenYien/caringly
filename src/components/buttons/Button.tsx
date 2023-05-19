@@ -6,13 +6,22 @@ import {
 
 import { PolymorphicComponentProps } from "@mantine/utils";
 
-type ButtonProps = PolymorphicComponentProps<"button", MantineButtonProps>;
+type ButtonProps = PolymorphicComponentProps<"button", MantineButtonProps> & {
+  gray?: boolean;
+};
 
-const Button = ({ children, variant = "filled", ...props }: ButtonProps) => {
+const Button = ({
+  children,
+  variant = "filled",
+  gray = false,
+  ...props
+}: ButtonProps) => {
   return (
     <MantineButton
       {...props}
       className={clsx(props.className, "rounded-full transition-all", {
+        "border-gray-400 text-gray-500 hover:border-gray-500 hover:bg-gray-200/25 active:bg-gray-200/50":
+          gray,
         "bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700":
           variant == "filled",
         "!bg-transparent text-indigo-500 hover:border-indigo-600 hover:text-indigo-600 active:text-indigo-700":

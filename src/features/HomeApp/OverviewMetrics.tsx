@@ -15,7 +15,7 @@ const metricsMeta: MetricsMeta[] = [
   {
     key: "depression",
     title: "Depression Detected",
-    color: "bg-fuchsia-100 shadow-fuchsia-200/50",
+    color: "bg-orange-100 shadow-orange-200/50",
   },
   {
     key: "suicide",

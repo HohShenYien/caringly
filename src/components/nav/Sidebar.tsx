@@ -11,24 +11,15 @@ import { BiLogOut, BiQuestionMark } from "react-icons/bi";
 import SidebarNavButton from "@/components/buttons/SidebarNavButton";
 import Button from "@/components/buttons/Button";
 import Logo from "../branding/Logo";
-import { helpModal } from "@/utils/modals/types";
+import { helpModal, newAccountModal } from "@/utils/modals/types";
 import openModal from "@/utils/modals/openModal";
+import UserProfileCard from "@/features/User/UserProfileCard";
 
 const Sidebar = () => {
-  const { user } = useSession();
   return (
-    <div className="fixed bottom-0 left-0 top-0 flex w-80 border-r-[1px] border-r-gray-200 bg-white">
+    <div className="fixed bottom-0 left-0 top-0 z-50 flex w-80 border-r-[1px] border-r-gray-200 bg-white">
       <div className="flex w-20 flex-col items-center border-r-[1px] border-r-indigo-200 bg-indigo-50 px-2 py-2">
-        <Avatar
-          radius="xl"
-          className="shadow-sm"
-          classNames={{
-            placeholder:
-              "bg-rose-200 transition-all hover:bg-rose-300 text-rose-600",
-          }}
-        >
-          {user?.username?.charAt(0)}
-        </Avatar>
+        <UserProfileCard />
         <div className="flex-1" />
         <Tooltip label="Help" position="top">
           <div className="mb-2">
@@ -68,7 +59,15 @@ const Sidebar = () => {
         </div>
 
         <div className="relative flex-1 space-y-2 overflow-auto px-2 py-2">
-          <Button className="fixed bottom-4 left-64 px-1">
+          <Button
+            className="fixed bottom-4 left-64 px-1"
+            onClick={() =>
+              openModal({
+                type: newAccountModal,
+                innerProps: {},
+              })
+            }
+          >
             <AiOutlinePlus size="28" />
           </Button>
           <SidebarNavButton

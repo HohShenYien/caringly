@@ -1,5 +1,7 @@
 interface User {
   username: string;
+  email: string;
+  receiveEmail: boolean;
 }
 
 type Session =
@@ -16,7 +18,9 @@ const useSession = (): Session => {
   const session: Session = {
     status: "authenticated",
     user: {
-      username: "John DOe",
+      username: "John Doe",
+      email: "johndoe@gmail.com",
+      receiveEmail: true,
     },
   };
   return session;

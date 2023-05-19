@@ -17,13 +17,13 @@ const ModalLayout = ({ title, children, padding = true }: ModalLayoutProps) => {
       )}
       <div
         className={clsx(
-          "max-h-[95vh] min-h-[40vh] overflow-y-auto",
+          "min-h-[40vh] overflow-y-auto",
           {
             "px-3 py-2": padding,
             "max-h-[95vh]": !title,
-            "max-h-[80vh]": title,
+            "max-h-[70vh]": title,
           },
-          "relative"
+          "flex flex-col"
         )}
       >
         {children}

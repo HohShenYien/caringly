@@ -10,7 +10,7 @@ const AppDashboard: NextPageWithLayout = () => {
   const [text, setText] = useState("");
 
   return (
-    <div className="flex h-full w-full flex-col">
+    <div className="flex h-full w-full flex-1 flex-col">
       <h1 className="mb-4 text-4xl">Scan</h1>
       <div className="pointer-events-none -mt-12 flex justify-center">
         <Lottie
