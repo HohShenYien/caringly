@@ -16,7 +16,7 @@ const watchData: WatchMeta[] = [
     color: "bg-blue-200 shadow-blue-300/50",
   },
   {
-    logo: "/icons/insta2.png",
+    logo: "/icons/instagram.png",
     key: "instagram",
     title: "Instagram",
     color: "bg-violet-200 shadow-violet-300/50",

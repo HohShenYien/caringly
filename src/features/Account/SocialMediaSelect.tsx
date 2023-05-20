@@ -16,7 +16,7 @@ const socialMedia: SocialMediaItem[] = [
   },
 
   {
-    image: "/icons/insta2.png",
+    image: "/icons/instagram.png",
     label: "Instagram",
     value: "instagram",
   },
@@ -48,9 +48,14 @@ SelectItem.displayName = "SocialMediaSelectItem";
 type SocialMediaSelectProps = Omit<
   ComponentProps<typeof Select>,
   "data" | "defaultValue" | "itemComponent"
->;
+> & {
+  withLabel?: boolean;
+};
 
-const SocialMediaSelect = (props: SocialMediaSelectProps) => {
+const SocialMediaSelect = ({
+  withLabel = false,
+  ...props
+}: SocialMediaSelectProps) => {
   const selectedIcon = useMemo(() => {
     const cur = props.value ?? "facebook";
     const selected = socialMedia.find((val) => val.value == cur)!;
@@ -61,6 +66,7 @@ const SocialMediaSelect = (props: SocialMediaSelectProps) => {
 
   return (
     <Select
+      label={withLabel ? "Type" : undefined}
       itemComponent={SelectItem}
       data={socialMedia}
       defaultValue="facebook"

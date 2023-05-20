@@ -4,7 +4,7 @@ const mantineTheme: MantineThemeOverride = {
   colorScheme: "light",
   components: {
     Tooltip: {
-      classNames: { tooltip: "text-xs bg-indigo-400" },
+      classNames: { tooltip: "text-xs bg-indigo-600" },
     },
     Tabs: {
       classNames: {

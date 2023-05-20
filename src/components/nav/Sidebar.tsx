@@ -15,6 +15,11 @@ import { helpModal, newAccountModal } from "@/utils/modals/types";
 import openModal from "@/utils/modals/openModal";
 import UserProfileCard from "@/features/User/UserProfileCard";
 
+const accountData = [
+  { name: "Leo Wai Yei", id: "asFGH" },
+  { name: "Khor Zhen Win", id: "kFqls" },
+];
+
 const Sidebar = () => {
   return (
     <div className="fixed bottom-0 left-0 top-0 z-50 flex w-80 border-r-[1px] border-r-gray-200 bg-white">
@@ -59,17 +64,22 @@ const Sidebar = () => {
         </div>
 
         <div className="relative flex-1 space-y-2 overflow-auto px-2 py-2">
-          <Button
-            className="fixed bottom-4 left-64 px-1"
-            onClick={() =>
-              openModal({
-                type: newAccountModal,
-                innerProps: {},
-              })
-            }
-          >
-            <AiOutlinePlus size="28" />
-          </Button>
+          <Tooltip label="New Watching Account">
+            <div className="fixed bottom-4 left-64">
+              <Button
+                className="px-1"
+                onClick={() =>
+                  openModal({
+                    type: newAccountModal,
+                    innerProps: {},
+                  })
+                }
+              >
+                <AiOutlinePlus size="28" />
+              </Button>
+            </div>
+          </Tooltip>
+
           <SidebarNavButton
             href="/app"
             text="Home"
@@ -80,6 +90,14 @@ const Sidebar = () => {
             text="Scan Text"
             logo={(isActive) => (isActive ? RiQrScanFill : RiQrScan2Line)}
           />
+          {accountData.map((data) => (
+            <SidebarNavButton
+              key={data.id}
+              href={`/app/users/${data.id}`}
+              text={data.name}
+              avatar={data.name}
+            />
+          ))}
         </div>
       </div>
     </div>

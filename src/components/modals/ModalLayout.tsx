@@ -4,10 +4,16 @@ import { clsx } from "@mantine/core";
 interface ModalLayoutProps {
   title?: string;
   children: ReactNode;
+  minHeight?: boolean;
   padding?: boolean;
 }
 
-const ModalLayout = ({ title, children, padding = true }: ModalLayoutProps) => {
+const ModalLayout = ({
+  title,
+  children,
+  minHeight = true,
+  padding = true,
+}: ModalLayoutProps) => {
   return (
     <div>
       {title && (
@@ -17,11 +23,12 @@ const ModalLayout = ({ title, children, padding = true }: ModalLayoutProps) => {
       )}
       <div
         className={clsx(
-          "min-h-[40vh] overflow-y-auto",
+          "overflow-y-auto",
           {
-            "px-3 py-2": padding,
+            "px-4 py-4": padding,
             "max-h-[95vh]": !title,
             "max-h-[70vh]": title,
+            "min-h-[40vh]": minHeight,
           },
           "flex flex-col"
         )}

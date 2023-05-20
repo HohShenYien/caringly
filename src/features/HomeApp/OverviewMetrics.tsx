@@ -70,7 +70,7 @@ const OverviewMetrics = () => {
               );
             })}
       </div>
-      <div className="ml-8 mt-10 flex space-x-6">
+      <div className="ml-8 mt-6 flex space-x-6">
         {isLoading
           ? metersMeta.map((_, key) => (
               <Skeleton key={key} width="390" height="249" />
