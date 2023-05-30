@@ -1,5 +1,7 @@
 import { Skeleton, clsx } from "@mantine/core";
 import { HasUserId } from ".";
+import { useCurrentMonitoredUserMetricsQuery } from "@/api/monitored-users";
+import { useEffect } from "react";
 
 interface MetricsMeta {
   key: string;
@@ -9,7 +11,7 @@ interface MetricsMeta {
 
 const metricsMeta: MetricsMeta[] = [
   {
-    key: "scanned",
+    key: "total",
     title: "Posts Scanned",
     color: "bg-blue-100 shadow-blue-200/50",
   },
@@ -44,11 +46,22 @@ const metersMeta: MetersMeta[] = [
   },
 ];
 
-const AccountMetrics = ({}: HasUserId) => {
-  const isLoading = false;
+interface AccountMetricsProps extends HasUserId {
+  duration: string;
+}
+
+const AccountMetrics = ({ id, duration }: AccountMetricsProps) => {
+  const {
+    isSuccess,
+    data: metrics,
+    refetch,
+  } = useCurrentMonitoredUserMetricsQuery(id, duration);
+  useEffect(() => {
+    refetch();
+  }, [duration, refetch]);
   return (
     <div className="ml-8 mt-6 flex justify-center space-x-12">
-      {isLoading
+      {!isSuccess
         ? metricsMeta.map((_, key) => (
             <Skeleton key={key} width="250" height="145" />
           ))
@@ -62,7 +75,9 @@ const AccountMetrics = ({}: HasUserId) => {
                 )}
               >
                 <h4 className="text-md">{data.title}</h4>
-                <div className="text-4xl font-semibold">5</div>
+                <div className="text-4xl font-semibold">
+                  {metrics[data.key]}
+                </div>
               </div>
             );
           })}

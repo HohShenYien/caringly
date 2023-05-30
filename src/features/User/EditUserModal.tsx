@@ -6,6 +6,9 @@ import useSession from "../Auth/useSession";
 import { PasswordInput, TextInput, Checkbox } from "@mantine/core";
 import Button from "@/components/buttons/Button";
 import { modals } from "@mantine/modals";
+import { useUpdateMeMutation, useUserQuery } from "@/api/auth";
+import { notifications } from "@mantine/notifications";
+import { useEffect } from "react";
 
 const profileSchema = z
   .object({
@@ -26,24 +29,47 @@ const profileSchema = z
     }
   });
 
-type UserProfile = z.infer<typeof profileSchema>;
+export type UserProfile = z.infer<typeof profileSchema>;
 
 const EditUserModal: MantineModal = () => {
+  const mutation = useUpdateMeMutation();
+  const userQuery = useUserQuery();
   const { user } = useSession();
+
   const form = useForm<UserProfile>({
     validate: zodResolver(profileSchema),
-    initialValues: {
-      username: user?.username ?? "",
-      email: user?.email ?? "",
-      password: "",
-      receiveEmailNotification: user?.receiveEmail ?? true,
-      newPassword: "",
-      newPasswordConfirmation: "",
-    },
   });
+  useEffect(() => {
+    if (user) {
+      form.setValues({
+        username: user?.username ?? "",
+        email: user?.email ?? "",
+        password: "",
+        receiveEmailNotification: user?.receiveEmail ?? true,
+        newPassword: "",
+        newPasswordConfirmation: "",
+      });
+    }
+  }, [user]);
 
   const submitForm = (data: UserProfile) => {
-    console.log(data);
+    mutation
+      .mutateAsync(data)
+      .then(() => {
+        userQuery.refetch();
+        notifications.show({
+          message: "Updated Successfully!",
+          color: "green",
+        });
+        modals.closeAll();
+      })
+      .catch((err) => {
+        console.log(err.response);
+        notifications.show({
+          message: err.response.data.message,
+          color: "red",
+        });
+      });
   };
   return (
     <ModalLayout title="Update User Profile">
@@ -94,10 +120,16 @@ const EditUserModal: MantineModal = () => {
             onClick={() => modals.closeAll()}
             variant="outline"
             gray
+            disabled={mutation.isLoading}
           >
             Cancel
           </Button>
-          <Button fullWidth className="rounded-md py-1" type="submit">
+          <Button
+            fullWidth
+            className="rounded-md py-1"
+            type="submit"
+            loading={mutation.isLoading}
+          >
             Submit
           </Button>
         </div>

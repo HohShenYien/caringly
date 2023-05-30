@@ -31,7 +31,7 @@ const UserProfileCard = () => {
         </Avatar>
       </Popover.Target>
       <Popover.Dropdown>
-        <div className="flex items-center space-x-4">
+        <div className="flex w-[300px] items-center space-x-4">
           <Avatar
             size="xl"
             className="rounded-full shadow-sm"

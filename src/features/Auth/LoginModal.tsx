@@ -1,12 +1,17 @@
+import { useLoginMutation } from "@/api/auth";
 import Button from "@/components/buttons/Button";
 import ModalLayout from "@/components/modals/ModalLayout";
 import openModal from "@/utils/modals/openModal";
 import { MantineModal, registerModal } from "@/utils/modals/types";
 import { TextInput, PasswordInput, Divider } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import Image from "next/image";
-import Link from "next/link";
 import { z } from "zod";
+import { setCookie } from "cookies-next";
+import { useRouter } from "next/router";
+import { modals } from "@mantine/modals";
+import { login } from "@/utils/auth";
 
 export interface LoginModalProps {}
 
@@ -15,15 +20,32 @@ const authSchema = z.object({
   password: z.string().min(1, "Password is required"),
 });
 
-type AuthType = z.infer<typeof authSchema>;
+export type AuthType = z.infer<typeof authSchema>;
 
 const LoginModal: MantineModal<LoginModalProps> = () => {
+  const router = useRouter();
+
+  const mutation = useLoginMutation();
   const form = useForm<AuthType>({
     validate: zodResolver(authSchema),
   });
 
   const submitForm = (data: AuthType) => {
-    console.log(data);
+    mutation
+      .mutateAsync(data)
+      .then((res) => {
+        login(res.data.auth_token);
+        setTimeout(() => {
+          modals.closeAll();
+          router.push("/app");
+        }, 500);
+      })
+      .catch((err) => {
+        notifications.show({
+          message: err.response.data.message,
+          color: "red",
+        });
+      });
   };
 
   return (
@@ -44,7 +66,12 @@ const LoginModal: MantineModal<LoginModalProps> = () => {
               {...form.getInputProps("password")}
             />
 
-            <Button fullWidth className="!mt-5 py-1" type="submit">
+            <Button
+              fullWidth
+              className="!mt-5 py-1"
+              type="submit"
+              loading={mutation.isLoading}
+            >
               Log in
             </Button>
           </form>

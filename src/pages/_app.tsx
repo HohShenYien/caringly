@@ -8,6 +8,7 @@ import { Notifications } from "@mantine/notifications";
 import AuthGuard from "@/components/auth/AuthGuard";
 import { modals } from "@/utils/modals/modals";
 import mantineTheme from "@/styles/theme";
+import { AxiosInterceptor } from "@/utils/api";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => JSX.Element;
@@ -22,12 +23,14 @@ export type AppPropsWithLayout = AppProps & {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <MantineProvider withGlobalStyles withNormalizeCSS theme={mantineTheme}>
-        <ModalsProvider modals={modals}>
-          <AuthGuard Component={Component} pageProps={pageProps} />
-        </ModalsProvider>
-        <Notifications />
-      </MantineProvider>
+      <AxiosInterceptor>
+        <MantineProvider withGlobalStyles withNormalizeCSS theme={mantineTheme}>
+          <ModalsProvider modals={modals}>
+            <AuthGuard Component={Component} pageProps={pageProps} />
+          </ModalsProvider>
+          <Notifications />
+        </MantineProvider>
+      </AxiosInterceptor>
     </>
   );
 }

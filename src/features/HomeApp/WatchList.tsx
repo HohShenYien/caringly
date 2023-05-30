@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { clsx, Skeleton } from "@mantine/core";
+import { useWatchlistQuery } from "@/api/stats";
 
 interface WatchMeta {
   logo: string;
@@ -22,12 +23,6 @@ const watchData: WatchMeta[] = [
     color: "bg-violet-200 shadow-violet-300/50",
   },
   {
-    logo: "/icons/reddit.png",
-    key: "reddit",
-    title: "Reddit",
-    color: "bg-rose-200 shadow-rose-300/50",
-  },
-  {
     logo: "/icons/twitter.png",
     key: "twitter",
     title: "Twitter",
@@ -36,21 +31,21 @@ const watchData: WatchMeta[] = [
 ];
 
 const WatchList = () => {
-  const isLoading = false;
+  const { data: metrics, isSuccess } = useWatchlistQuery();
   return (
     <div>
-      <h2 className="mb-3 text-xl">My Watchlist</h2>
+      <h2 className="mb-3 text-xl">My Watchlist Accounts</h2>
       <div className="ml-8 flex space-x-6">
-        {isLoading
+        {!isSuccess
           ? watchData.map((_, key) => (
-              <Skeleton key={key} width="180" height="80" />
+              <Skeleton key={key} width="250" height="97" />
             ))
           : watchData.map((data) => {
               return (
                 <div
                   key={data.key}
                   className={clsx(
-                    "flex w-[180px] space-x-3 rounded-md px-4 py-2 shadow-md",
+                    "flex w-[250px] space-x-3 rounded-md px-4 py-4 shadow-md",
                     data.color
                   )}
                 >
@@ -63,7 +58,9 @@ const WatchList = () => {
                   />
                   <div className="flex h-full flex-1 flex-col items-center justify-between">
                     <h4 className="text-sm">{data.title}</h4>
-                    <div className="text-3xl font-semibold">5</div>
+                    <div className="text-3xl font-semibold">
+                      {metrics[data.key] ?? 0}
+                    </div>
                   </div>
                 </div>
               );

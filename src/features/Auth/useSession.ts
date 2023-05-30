@@ -1,3 +1,7 @@
+import { useUserQuery } from "@/api/auth";
+import { deleteCookie } from "cookies-next";
+import { useMemo, useState } from "react";
+
 interface User {
   username: string;
   email: string;
@@ -15,14 +19,36 @@ type Session =
     };
 
 const useSession = (): Session => {
-  const session: Session = {
-    status: "authenticated",
-    user: {
-      username: "John Doe",
-      email: "johndoe@gmail.com",
-      receiveEmail: true,
-    },
-  };
+  const { data, isLoading, isError, isSuccess, isFetching } = useUserQuery();
+  const session = useMemo<Session>(() => {
+    if (isLoading && isFetching) {
+      return {
+        status: "loading",
+        user: undefined,
+      };
+    }
+    if (!isSuccess && !isFetching) {
+      return {
+        status: "unauthenticated",
+        user: undefined,
+      };
+    }
+    if (!isSuccess || isError) {
+      deleteCookie("authToken", { path: "/", domain: "localhost" });
+      return {
+        status: "unauthenticated",
+        user: undefined,
+      };
+    }
+    const user = data.data.data as User;
+    user.receiveEmail = data.data.data.receive_email;
+    const session: Session = {
+      status: "authenticated",
+      user: user,
+    };
+    return session;
+  }, [data, isLoading, isError, isSuccess, isFetching]);
+
   return session;
 };
 

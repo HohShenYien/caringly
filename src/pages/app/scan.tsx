@@ -4,6 +4,7 @@ import Lottie from "react-lottie";
 import { useEffect, useState } from "react";
 import { Textarea } from "@mantine/core";
 import Button from "@/components/buttons/Button";
+import Head from "next/head";
 
 const AppDashboard: NextPageWithLayout = () => {
   const [animating, setAnimating] = useState(false);
@@ -11,6 +12,9 @@ const AppDashboard: NextPageWithLayout = () => {
 
   return (
     <div className="flex h-full w-full flex-1 flex-col">
+      <Head>
+        <title>Scan | Caringly</title>
+      </Head>
       <h1 className="mb-4 text-4xl">Scan</h1>
       <div className="pointer-events-none -mt-12 flex justify-center">
         <Lottie

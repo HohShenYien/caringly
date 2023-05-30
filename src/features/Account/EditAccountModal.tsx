@@ -7,17 +7,25 @@ import Button from "@/components/buttons/Button";
 import { modals } from "@mantine/modals";
 import { UserSocialMediaAccountProps } from ".";
 import SocialMediaSelect from "./SocialMediaSelect";
+import { useEditSocialAccountMutation } from "@/api/social-accounts";
+import { notifications } from "@mantine/notifications";
 
 const editAccountSchema = z.object({
   type: z.string(),
   url: z.string().url(),
 });
 
-type EditAccount = z.infer<typeof editAccountSchema>;
+export type EditAccount = z.infer<typeof editAccountSchema>;
 
-const EditAccountModal: MantineModal<UserSocialMediaAccountProps> = ({
-  innerProps: { account },
+export interface EditAccountModalProps extends UserSocialMediaAccountProps {
+  userId: string;
+}
+
+const EditAccountModal: MantineModal<EditAccountModalProps> = ({
+  innerProps: { account, userId },
 }) => {
+  const mutation = useEditSocialAccountMutation(userId, account.id);
+
   const form = useForm<EditAccount>({
     validate: zodResolver(editAccountSchema),
     initialValues: {
@@ -27,7 +35,13 @@ const EditAccountModal: MantineModal<UserSocialMediaAccountProps> = ({
   });
 
   const submitForm = (data: EditAccount) => {
-    console.log(data);
+    mutation.mutateAsync(data).then(() => {
+      notifications.show({
+        message: "Updated successfully",
+        color: "green",
+      });
+      modals.closeAll();
+    });
   };
   return (
     <ModalLayout title="Edit Account">

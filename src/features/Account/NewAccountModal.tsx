@@ -7,9 +7,13 @@ import { FiDelete } from "react-icons/fi";
 import { z } from "zod";
 import SocialMediaSelect from "./SocialMediaSelect";
 import { modals } from "@mantine/modals";
+import { useCreateMonitoredUserMutation } from "@/api/monitored-users";
+import { useRouter } from "next/router";
+import { notifications } from "@mantine/notifications";
 
 const newAccount = z.object({
   name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid Email"),
   accounts: z.array(
     z.object({
       type: z.string(),
@@ -17,13 +21,16 @@ const newAccount = z.object({
     })
   ),
 });
-type NewAccountType = z.infer<typeof newAccount>;
+export type NewAccountType = z.infer<typeof newAccount>;
 
 const NewAccountModal: MantineModal = () => {
+  const mutation = useCreateMonitoredUserMutation();
+  const router = useRouter();
   const form = useForm({
     validate: zodResolver<NewAccountType>(newAccount),
     initialValues: {
       name: "",
+      email: "",
       accounts: [
         {
           type: "facebook",
@@ -54,7 +61,14 @@ const NewAccountModal: MantineModal = () => {
   ));
 
   const onSubmit = (data: NewAccountType) => {
-    console.log(data);
+    mutation.mutateAsync(data).then((res) => {
+      notifications.show({
+        message: "Account Created Successfully!",
+        color: "green",
+      });
+      modals.closeAll();
+      router.push(`/app/users/${res.id}`);
+    });
   };
 
   return (
@@ -68,6 +82,12 @@ const NewAccountModal: MantineModal = () => {
           placeholder="John Doe"
           variant="filled"
           {...form.getInputProps("name")}
+        />
+        <TextInput
+          label="Email"
+          placeholder="johndoe@gmail.com"
+          variant="filled"
+          {...form.getInputProps("email")}
         />
         <div className="flex-1">
           <p className="text-sm font-medium">Social Media Accounts</p>

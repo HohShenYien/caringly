@@ -1,5 +1,7 @@
+import { DangerousUserModalProps } from "@/components/modals/DangerousUserModal";
 import { UserAccount, UserSocialMediaAccountProps } from "@/features/Account";
 import { UserAccountProps } from "@/features/Account";
+import { EditAccountModalProps } from "@/features/Account/EditAccountModal";
 import { ContextModalProps, modals } from "@mantine/modals";
 import { ReactElement } from "react";
 
@@ -13,6 +15,7 @@ export const deleteUserModal = "Delete User Modal";
 export const deleteAccountModal = "Delete Account Modal";
 export const editAccountModal = "Edit Account Modal";
 export const addAccountModal = "Add Account Modal";
+export const dangerousUserModal = "Dangerous User Modal";
 
 export type ModalType =
   | typeof loginModal
@@ -24,7 +27,8 @@ export type ModalType =
   | typeof deleteUserModal
   | typeof deleteAccountModal
   | typeof editAccountModal
-  | typeof addAccountModal;
+  | typeof addAccountModal
+  | typeof dangerousUserModal;
 
 export type ModalInnerProps = {
   [key in
@@ -32,16 +36,21 @@ export type ModalInnerProps = {
     | typeof registerModal
     | typeof helpModal
     | typeof editUserModal
-    | typeof newAccountModal
-    | typeof addAccountModal]: {};
+    | typeof newAccountModal]: {};
 } & {
   [key in
     | typeof editAccountNameModal
     | typeof deleteUserModal]: UserAccountProps;
 } & {
+  [key in typeof addAccountModal]: {
+    userId: string;
+  };
+} & {
   [key in
-    | typeof deleteAccountModal
-    | typeof editAccountModal]: UserSocialMediaAccountProps;
+    | typeof editAccountModal
+    | typeof deleteAccountModal]: EditAccountModalProps;
+} & {
+  [key in typeof dangerousUserModal]: DangerousUserModalProps;
 };
 
 export type MantineModal<P extends Record<string, any> = {}> = ((

@@ -3,6 +3,7 @@ import {
   MantineModal,
   ModalType,
   addAccountModal,
+  dangerousUserModal,
   deleteAccountModal,
   deleteUserModal,
   editAccountModal,
@@ -22,6 +23,7 @@ import DeleteUserConfirmModal from "@/features/Account/DeleteUserConfirmModal";
 import DeleteAccountConfirmModal from "@/features/Account/DeleteAccountConfirmModal";
 import EditAccountModal from "@/features/Account/EditAccountModal";
 import AddAccountModal from "@/features/Account/AddAccountModal";
+import DangerousUserModal from "@/components/modals/DangerousUserModal";
 
 export const modals: Record<ModalType, MantineModal<any>> = {
   [loginModal]: LoginModal,
@@ -34,4 +36,5 @@ export const modals: Record<ModalType, MantineModal<any>> = {
   [deleteAccountModal]: DeleteAccountConfirmModal,
   [editAccountModal]: EditAccountModal,
   [addAccountModal]: AddAccountModal,
+  [dangerousUserModal]: DangerousUserModal,
 };

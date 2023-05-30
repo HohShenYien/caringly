@@ -6,15 +6,21 @@ import { TextInput } from "@mantine/core";
 import Button from "@/components/buttons/Button";
 import { modals } from "@mantine/modals";
 import SocialMediaSelect from "./SocialMediaSelect";
+import { useCreateSocialAccountMutation } from "@/api/social-accounts";
+import { notifications } from "@mantine/notifications";
 
 const addAccountSchema = z.object({
   type: z.string(),
   url: z.string().url(),
 });
 
-type AddAccount = z.infer<typeof addAccountSchema>;
+export type AddAccount = z.infer<typeof addAccountSchema>;
 
-const AddAccountModal: MantineModal = () => {
+const AddAccountModal: MantineModal<{ userId: string }> = ({
+  innerProps: { userId },
+}) => {
+  const mutation = useCreateSocialAccountMutation(userId);
+
   const form = useForm<AddAccount>({
     validate: zodResolver(addAccountSchema),
     initialValues: {
@@ -24,7 +30,13 @@ const AddAccountModal: MantineModal = () => {
   });
 
   const submitForm = (data: AddAccount) => {
-    console.log(data);
+    mutation.mutateAsync(data).then(() => {
+      notifications.show({
+        message: "Account Created",
+        color: "green",
+      });
+      modals.closeAll();
+    });
   };
   return (
     <ModalLayout title="Add New Account">

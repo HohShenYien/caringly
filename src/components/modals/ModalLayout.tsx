@@ -6,19 +6,22 @@ interface ModalLayoutProps {
   children: ReactNode;
   minHeight?: boolean;
   padding?: boolean;
+  titleNode?: ReactNode;
 }
 
 const ModalLayout = ({
   title,
   children,
+  titleNode,
   minHeight = true,
   padding = true,
 }: ModalLayoutProps) => {
   return (
     <div>
-      {title && (
+      {(title || titleNode) && (
         <div className="border-b-solid border-b-[1px] border-b-gray-300 px-10 py-2 text-center">
-          <div className="text-lg font-semibold">{title}</div>
+          {title && <div className="text-lg font-semibold">{title}</div>}
+          {titleNode}
         </div>
       )}
       <div
