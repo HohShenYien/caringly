@@ -1,7 +1,10 @@
 import { DangerousUserModalProps } from "@/components/modals/DangerousUserModal";
+import { MonitoredUserPostsProps } from "@/components/modals/MonitoredUserPosts";
 import { UserAccount, UserSocialMediaAccountProps } from "@/features/Account";
 import { UserAccountProps } from "@/features/Account";
 import { EditAccountModalProps } from "@/features/Account/EditAccountModal";
+import { ScanResultProps } from "@/features/Scan/ScanResultModal";
+import { ScanUserResultProps } from "@/features/Scan/ScanUserResultModal";
 import { ContextModalProps, modals } from "@mantine/modals";
 import { ReactElement } from "react";
 
@@ -16,6 +19,10 @@ export const deleteAccountModal = "Delete Account Modal";
 export const editAccountModal = "Edit Account Modal";
 export const addAccountModal = "Add Account Modal";
 export const dangerousUserModal = "Dangerous User Modal";
+export const scanResultModal = "Scan Result Modal";
+export const scanningModal = "Scanning Modal";
+export const scanUserResultModal = "Scan User Result Modal";
+export const monitoredUserPostsModal = "Monitored User Posts Modal";
 
 export type ModalType =
   | typeof loginModal
@@ -28,7 +35,11 @@ export type ModalType =
   | typeof deleteAccountModal
   | typeof editAccountModal
   | typeof addAccountModal
-  | typeof dangerousUserModal;
+  | typeof dangerousUserModal
+  | typeof scanResultModal
+  | typeof scanningModal
+  | typeof scanUserResultModal
+  | typeof monitoredUserPostsModal;
 
 export type ModalInnerProps = {
   [key in
@@ -36,7 +47,8 @@ export type ModalInnerProps = {
     | typeof registerModal
     | typeof helpModal
     | typeof editUserModal
-    | typeof newAccountModal]: {};
+    | typeof newAccountModal
+    | typeof scanningModal]: {};
 } & {
   [key in
     | typeof editAccountNameModal
@@ -51,6 +63,12 @@ export type ModalInnerProps = {
     | typeof deleteAccountModal]: EditAccountModalProps;
 } & {
   [key in typeof dangerousUserModal]: DangerousUserModalProps;
+} & {
+  [key in typeof scanResultModal]: ScanResultProps;
+} & {
+  [key in typeof scanUserResultModal]: ScanUserResultProps;
+} & {
+  [key in typeof monitoredUserPostsModal]: MonitoredUserPostsProps;
 };
 
 export type MantineModal<P extends Record<string, any> = {}> = ((

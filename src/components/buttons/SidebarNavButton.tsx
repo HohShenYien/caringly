@@ -36,7 +36,12 @@ const SidebarNavButton = ({
             })}
           >
             {logo ? (
-              CurrentLogo && <CurrentLogo size="26" />
+              CurrentLogo && (
+                <CurrentLogo
+                  size="26"
+                  className={clsx({ "text-indigo-800": !isActive })}
+                />
+              )
             ) : (
               <Avatar
                 size="sm"

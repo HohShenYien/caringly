@@ -3,6 +3,7 @@ import { NextPageWithLayout } from "../_app";
 import WatchList from "@/features/HomeApp/WatchList";
 import OverviewMetrics from "@/features/HomeApp/OverviewMetrics";
 import Head from "next/head";
+import { useEffect } from "react";
 
 const AppDashboard: NextPageWithLayout = () => {
   return (

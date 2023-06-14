@@ -5,9 +5,23 @@ import { clsx } from "@mantine/core";
 import useNavStyles from "./useNavStyles";
 import openModal from "@/utils/modals/openModal";
 import { loginModal, registerModal } from "@/utils/modals/types";
+import useSession from "@/features/Auth/useSession";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const navStyle = useNavStyles();
+  const router = useRouter();
+  const { status } = useSession();
+  const authAction = (modal: typeof loginModal | typeof registerModal) => {
+    if (status === "authenticated") {
+      router.push("/app");
+    } else {
+      openModal({
+        type: modal,
+        innerProps: {},
+      });
+    }
+  };
 
   return (
     <div
@@ -28,10 +42,7 @@ const Navbar = () => {
             variant="subtle"
             className="text-lg"
             onClick={() => {
-              openModal({
-                type: loginModal,
-                innerProps: {},
-              });
+              authAction(loginModal);
             }}
           >
             Sign in
@@ -39,10 +50,7 @@ const Navbar = () => {
           <Button
             className="text-lg"
             onClick={() => {
-              openModal({
-                type: registerModal,
-                innerProps: {},
-              });
+              authAction(registerModal);
             }}
           >
             Register

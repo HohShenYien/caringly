@@ -2,13 +2,23 @@ import {
   useCurrentMonitoredUserQuery,
   useDeleteMonitoredUserMutation,
 } from "@/api/monitored-users";
+import { useScanUserMutation } from "@/api/scan";
+import Button from "@/components/buttons/Button";
 import AccountMetrics from "@/features/Account/AccountMetrics";
 import UserAccounts from "@/features/Account/UserAccounts";
 import getAppLayout from "@/layouts/AppLayout";
 import { NextPageWithLayout } from "@/pages/_app";
 import openModal from "@/utils/modals/openModal";
-import { deleteUserModal, editAccountNameModal } from "@/utils/modals/types";
+import {
+  deleteUserModal,
+  editAccountNameModal,
+  scanResultModal,
+  scanUserResultModal,
+  scanningModal,
+} from "@/utils/modals/types";
 import { ActionIcon, Select, Skeleton, Tooltip } from "@mantine/core";
+import { modals } from "@mantine/modals";
+import { notifications } from "@mantine/notifications";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -38,6 +48,44 @@ const AccountPage: NextPageWithLayout = () => {
   const { id } = useRouter().query as { id: string };
   const { data, isSuccess } = useCurrentMonitoredUserQuery(id);
   const [duration, setDuration] = useState<string>("month");
+
+  const scanUser = useScanUserMutation(id);
+  const scan = () => {
+    openModal({
+      type: scanningModal,
+      innerProps: {},
+    });
+    scanUser.mutateAsync().then((res) => {
+      modals.closeAll();
+      if (res.length == 0) {
+        notifications.show({
+          message: "No new post since the last scan",
+        });
+        return;
+      }
+      for (const post of res) {
+        if (post.category == "depression" || post.category == "suicide") {
+          openModal({
+            type: scanUserResultModal,
+            innerProps: {
+              post: post,
+              name: data?.name ?? "",
+              status: post.category,
+            },
+          });
+          return;
+        }
+      }
+      openModal({
+        type: scanUserResultModal,
+        innerProps: {
+          name: data?.name ?? "",
+          status: "neutral",
+        },
+      });
+    });
+  };
+
   return (
     <div>
       <Head>
@@ -50,6 +98,10 @@ const AccountPage: NextPageWithLayout = () => {
           </h1>
           {isSuccess && (
             <>
+              <Button className="rounded-md py-1" onClick={scan}>
+                Scan Now
+              </Button>
+
               <Tooltip label="Edit Name">
                 <ActionIcon
                   color="indigo"

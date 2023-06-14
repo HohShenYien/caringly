@@ -11,8 +11,12 @@ import {
   editUserModal,
   helpModal,
   loginModal,
+  monitoredUserPostsModal,
   newAccountModal,
   registerModal,
+  scanResultModal,
+  scanUserResultModal,
+  scanningModal,
 } from "./types";
 import RegisterModal from "@/features/Auth/RegisterModal";
 import HelpModal from "@/components/modals/HelpModal";
@@ -24,6 +28,10 @@ import DeleteAccountConfirmModal from "@/features/Account/DeleteAccountConfirmMo
 import EditAccountModal from "@/features/Account/EditAccountModal";
 import AddAccountModal from "@/features/Account/AddAccountModal";
 import DangerousUserModal from "@/components/modals/DangerousUserModal";
+import ScanResultModal from "@/features/Scan/ScanResultModal";
+import ScanningModal from "@/components/modals/ScanningModal";
+import ScanUserResultModal from "@/features/Scan/ScanUserResultModal";
+import MonitoredUserPosts from "@/components/modals/MonitoredUserPosts";
 
 export const modals: Record<ModalType, MantineModal<any>> = {
   [loginModal]: LoginModal,
@@ -37,4 +45,8 @@ export const modals: Record<ModalType, MantineModal<any>> = {
   [editAccountModal]: EditAccountModal,
   [addAccountModal]: AddAccountModal,
   [dangerousUserModal]: DangerousUserModal,
+  [scanResultModal]: ScanResultModal,
+  [scanningModal]: ScanningModal,
+  [scanUserResultModal]: ScanUserResultModal,
+  [monitoredUserPostsModal]: MonitoredUserPosts,
 };

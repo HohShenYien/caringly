@@ -110,10 +110,16 @@ const NewAccountModal: MantineModal = () => {
             onClick={() => modals.closeAll()}
             variant="outline"
             gray
+            disabled={mutation.isLoading}
           >
             Cancel
           </Button>
-          <Button fullWidth className="rounded-md py-1" type="submit">
+          <Button
+            fullWidth
+            className="rounded-md py-1"
+            type="submit"
+            loading={mutation.isLoading}
+          >
             Submit
           </Button>
         </div>

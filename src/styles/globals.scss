@@ -23,3 +23,7 @@ html body {
 .mantine-Input-input {
   border: solid 1px gray;
 }
+
+a.link {
+  @apply cursor-pointer font-medium text-indigo-600 hover:text-indigo-700 hover:underline;
+}

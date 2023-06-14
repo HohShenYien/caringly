@@ -2,47 +2,38 @@ import { Skeleton, clsx } from "@mantine/core";
 import { HasUserId } from ".";
 import { useCurrentMonitoredUserMetricsQuery } from "@/api/monitored-users";
 import { useEffect } from "react";
+import openModal from "@/utils/modals/openModal";
+import { monitoredUserPostsModal } from "@/utils/modals/types";
 
 interface MetricsMeta {
   key: string;
   title: string;
   color: string;
+  active: string;
+  target: "all" | "depression" | "suicide";
 }
 
 const metricsMeta: MetricsMeta[] = [
   {
     key: "total",
     title: "Posts Scanned",
-    color: "bg-blue-100 shadow-blue-200/50",
+    color: "bg-blue-200 shadow-blue-200/50",
+    active: "hover:bg-blue-100",
+    target: "all",
   },
   {
     key: "depression",
     title: "Depression Detected",
-    color: "bg-orange-100 shadow-orange-200/50",
+    color: "bg-orange-200 shadow-orange-200/50",
+    active: "hover:bg-orange-100",
+    target: "depression",
   },
   {
     key: "suicide",
     title: "Suicide Detected",
-    color: "bg-red-100 shadow-red-200/50",
-  },
-];
-
-interface MetersMeta {
-  title: string;
-  key: string;
-  color: string;
-}
-
-const metersMeta: MetersMeta[] = [
-  {
-    title: "Accounts Suspected of Depression",
-    key: "depression",
-    color: "bg-green-100 shadow-green-200/50",
-  },
-  {
-    title: "Accounts Suspected of Suicide",
-    key: "suicide",
-    color: "bg-emerald-100 shadow-emerald-200/50",
+    color: "bg-red-200 shadow-red-200/50",
+    active: "hover:bg-red-100",
+    target: "suicide",
   },
 ];
 
@@ -70,9 +61,22 @@ const AccountMetrics = ({ id, duration }: AccountMetricsProps) => {
               <div
                 key={data.key}
                 className={clsx(
-                  "w-[250px] space-y-4 rounded-md py-8 text-center shadow-md",
-                  data.color
+                  "w-[250px] space-y-4 rounded-md py-8 text-center shadow-md transition-all",
+                  data.color,
+                  { [`${data.active} cursor-pointer`]: metrics[data.key] > 0 }
                 )}
+                onClick={() => {
+                  if (metrics[data.key] > 0) {
+                    openModal({
+                      type: monitoredUserPostsModal,
+                      innerProps: {
+                        duration,
+                        id,
+                        type: data.target,
+                      },
+                    });
+                  }
+                }}
               >
                 <h4 className="text-md">{data.title}</h4>
                 <div className="text-4xl font-semibold">

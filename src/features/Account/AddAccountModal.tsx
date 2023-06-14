@@ -8,13 +8,9 @@ import { modals } from "@mantine/modals";
 import SocialMediaSelect from "./SocialMediaSelect";
 import { useCreateSocialAccountMutation } from "@/api/social-accounts";
 import { notifications } from "@mantine/notifications";
+import { socialMediaAccountSchema } from ".";
 
-const addAccountSchema = z.object({
-  type: z.string(),
-  url: z.string().url(),
-});
-
-export type AddAccount = z.infer<typeof addAccountSchema>;
+export type AddAccount = z.infer<typeof socialMediaAccountSchema>;
 
 const AddAccountModal: MantineModal<{ userId: string }> = ({
   innerProps: { userId },
@@ -22,7 +18,7 @@ const AddAccountModal: MantineModal<{ userId: string }> = ({
   const mutation = useCreateSocialAccountMutation(userId);
 
   const form = useForm<AddAccount>({
-    validate: zodResolver(addAccountSchema),
+    validate: zodResolver(socialMediaAccountSchema),
     initialValues: {
       type: "facebook",
       url: "",
@@ -30,13 +26,23 @@ const AddAccountModal: MantineModal<{ userId: string }> = ({
   });
 
   const submitForm = (data: AddAccount) => {
-    mutation.mutateAsync(data).then(() => {
-      notifications.show({
-        message: "Account Created",
-        color: "green",
+    mutation
+      .mutateAsync(data)
+      .then(() => {
+        notifications.show({
+          message: "Account Created",
+          color: "green",
+        });
+        modals.closeAll();
+      })
+      .catch((err) => {
+        notifications.show({
+          message:
+            err?.response?.data?.message ??
+            "Something went wrong, please try again",
+          color: "red",
+        });
       });
-      modals.closeAll();
-    });
   };
   return (
     <ModalLayout title="Add New Account">
@@ -64,10 +70,16 @@ const AddAccountModal: MantineModal<{ userId: string }> = ({
             onClick={() => modals.closeAll()}
             variant="outline"
             gray
+            disabled={mutation.isLoading}
           >
             Cancel
           </Button>
-          <Button fullWidth className="rounded-md py-1" type="submit">
+          <Button
+            fullWidth
+            className="rounded-md py-1"
+            type="submit"
+            loading={mutation.isLoading}
+          >
             Submit
           </Button>
         </div>

@@ -16,6 +16,7 @@ export type SocialMediaUserData = {
   url: string;
   id: string;
   username: string;
+  profile_pic_url: string;
 };
 
 type UserAccountsProps = HasUserId & {
@@ -83,11 +84,7 @@ const UserAccounts = ({ accounts, isLoading, id }: UserAccountsProps) => {
 
                     <td>{account.username}</td>
                     <td>
-                      <a
-                        href={account.url}
-                        target="_blank"
-                        className="font-medium text-indigo-600 hover:underline"
-                      >
+                      <a href={account.url} target="_blank" className="link">
                         {account.url}
                       </a>
                     </td>

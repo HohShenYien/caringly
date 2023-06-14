@@ -1,6 +1,7 @@
 import { AccountName } from "@/features/Account/EditAccountNameModal";
 import { NewAccountType } from "@/features/Account/NewAccountModal";
 import { SocialMediaUserData } from "@/features/Account/UserAccounts";
+import { Post } from "@/features/Post/types";
 import apiClient from "@/utils/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo } from "react";
@@ -87,6 +88,22 @@ export const useDeleteMonitoredUserMutation = (id: string) => {
     },
     onSuccess: () => {
       queryClient.resetQueries({ queryKey: ["monitored-users"] });
+    },
+  });
+};
+
+export const useMonitoredUserPostsQuery = (
+  id: string,
+  type: string,
+  duration: string
+) => {
+  return useQuery<Post[]>({
+    queryKey: ["monitored-user-posts", id, type, duration],
+    queryFn: async () => {
+      const res = await apiClient.get(
+        `/monitored-users/${id}/posts/${type}?date=${duration}`
+      );
+      return res.data.data;
     },
   });
 };
