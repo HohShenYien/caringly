@@ -6,7 +6,12 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const rettiwt = Rettiwt();
+    const rettiwt = Rettiwt({
+      auth_token: process.env.TWITTER_AUTH_TOKEN ?? "",
+      ct0: process.env.TWITTER_CT0 ?? "",
+      kdt: process.env.TWITTER_KDT ?? "",
+      twid: process.env.TWITTER_TWID ?? "",
+    });
     const { username } = req.query as { username: string };
 
     const user = await rettiwt.users.getUserDetails(username);
