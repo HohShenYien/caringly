@@ -29,8 +29,8 @@ const ModalLayout = ({
           "overflow-y-auto",
           {
             "px-4 py-4": padding,
-            "max-h-[95vh]": !title,
-            "max-h-[70vh]": title,
+            "max-h-[95vh]": !(title || titleNode),
+            "max-h-[70vh]": title || titleNode,
             "min-h-[40vh]": minHeight,
           },
           "flex flex-col"

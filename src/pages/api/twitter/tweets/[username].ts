@@ -27,8 +27,8 @@ export default async function handler(
     let tweets = await rettiwt.tweets.getTweets(
       {
         // hashtags: ["twitter"],
-        words: ["twitter"],
-        // startDate: lastScanned.toISOString().split("T")[0],
+        fromUsers: [username],
+        startDate: lastScanned.toISOString().split("T")[0],
       },
       15
     );
@@ -43,7 +43,7 @@ export default async function handler(
       }
 
       for (const tweet of tweets.list) {
-        if (new Date(tweet.createdAt).getTime() < lastScanned.getTime()) {
+        if (new Date(tweet.createdAt).getTime() > lastScanned.getTime()) {
           values.push(tweet);
         } else {
           flag = false;
@@ -54,7 +54,6 @@ export default async function handler(
         flag = false;
       }
     }
-    console.log(values);
     res.status(200).json({ tweets: values });
   } catch (e) {
     console.log(e);

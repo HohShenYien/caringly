@@ -3708,10 +3708,10 @@ retry@^0.12.0:
   resolved "https://registry.yarnpkg.com/retry/-/retry-0.12.0.tgz#1b42a6266a21f07421d1b0b54b7dc167b01c013b"
   integrity sha512-9LkiTwjUh6rT555DtE9rTX+BKByPfrMzEAtnlEtdEwr3Nkffwiihqe2bWADg+OQRjt9gl6ICdmB/ZFDCGAtSow==
 
-rettiwt-api@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/rettiwt-api/-/rettiwt-api-1.2.0.tgz#701dcf8ee9321e85b19e359d02c8b5f5424b443e"
-  integrity sha512-LvdHeEb6qAwAyQCNV/jSZdLHoJJ60xzSMnsDXjEOrTsHNqX0mLlJgbQMaxEjiWMVUUgOfUQYHBBVabS71lqGxA==
+rettiwt-api@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/rettiwt-api/-/rettiwt-api-1.3.1.tgz#670ed70d061125dcdccbd15af65c12545b99195e"
+  integrity sha512-8of2lKsVQ+laQ2eozp5XlhiHODE/Dy+7NcZqEdeYSa+09OTpC4G9toT/RsxLWkAXA56Qus0fmNyhx913m09Flw==
   dependencies:
     axios "1.3.2"
     class-transformer "0.5.1"
@@ -3723,6 +3723,14 @@ rettiwt-api@^1.2.0:
     node-cache "5.1.2"
     node-libcurl "3.0.0"
     reflect-metadata "0.1.13"
+    rettiwt-core "2.3.0"
+
+rettiwt-core@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/rettiwt-core/-/rettiwt-core-2.3.0.tgz#8f316110132a4247c8761446252ae117e67b8465"
+  integrity sha512-mfyMRqMVtpQ7plxTL6mqhr2LWWS2YbO1owxz3FhE4r6y6DNJ7V9lRxtl+wTpqg7/SSrA5Q/ijTAPrztaQ7zoFQ==
+  dependencies:
+    class-validator "0.14.0"
 
 reusify@^1.0.4:
   version "1.0.4"

@@ -15,6 +15,7 @@ export default async function handler(
     const { username } = req.query as { username: string };
 
     const user = await rettiwt.users.getUserDetails(username);
+    console.log(user);
     res.status(200).json({ user });
   } catch (e) {
     console.log(e);

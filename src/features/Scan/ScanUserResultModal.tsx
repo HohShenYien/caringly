@@ -2,8 +2,6 @@ import ModalLayout from "@/components/modals/ModalLayout";
 import { MantineModal } from "@/utils/modals/types";
 import Lottie from "react-lottie";
 import { Post as PostType } from "../Post/types";
-import Image from "next/image";
-import { FiExternalLink } from "react-icons/fi";
 import Post from "../Post/Post";
 
 export interface ScanUserResultProps {
