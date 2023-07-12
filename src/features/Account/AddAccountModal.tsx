@@ -20,7 +20,7 @@ const AddAccountModal: MantineModal<{ userId: string }> = ({
   const form = useForm<AddAccount>({
     validate: zodResolver(socialMediaAccountSchema),
     initialValues: {
-      type: "facebook",
+      type: "twitter",
       url: "",
     },
   });

@@ -33,7 +33,7 @@ const NewAccountModal: MantineModal = () => {
       email: "",
       accounts: [
         {
-          type: "facebook",
+          type: "twitter",
           url: "",
         },
       ],
@@ -45,7 +45,7 @@ const NewAccountModal: MantineModal = () => {
       <SocialMediaSelect {...form.getInputProps(`accounts.${index}.type`)} />
       <TextInput
         className="flex-1"
-        placeholder="https://facebook.com/u/john.doe"
+        placeholder="https://twitter.com/ShenYien212"
         variant="filled"
         {...form.getInputProps(`accounts.${index}.url`)}
       />
@@ -96,7 +96,7 @@ const NewAccountModal: MantineModal = () => {
             <Button
               className="mx-auto mt-2 rounded-md py-1"
               onClick={() =>
-                form.insertListItem("accounts", { url: "", type: "facebook" })
+                form.insertListItem("accounts", { url: "", type: "twitter" })
               }
             >
               Add Account

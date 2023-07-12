@@ -42,7 +42,7 @@ const EditAccountNameModal: MantineModal<UserAccountProps> = ({
     });
   };
   return (
-    <ModalLayout title="Edit Username">
+    <ModalLayout title="Edit Account Name">
       <form
         className="flex flex-1 flex-col justify-between space-y-2"
         onSubmit={form.onSubmit(submitForm)}

@@ -74,6 +74,7 @@ const AppDashboard: NextPageWithLayout = () => {
           className="rounded-md py-[10px]"
           onClick={scan}
           loading={scanMutation.isLoading}
+          disabled={text.length == 0}
         >
           Check
         </Button>

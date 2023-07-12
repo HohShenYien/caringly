@@ -19,14 +19,11 @@ export default async function handler(
     };
 
     const values: Tweet[] = [];
-    const lastScanned = new Date();
-    lastScanned.setFullYear(2000);
-    console.log(username, lastScanned);
+    const lastScanned = new Date(last_scanned);
 
     // Getting the tweets of the user using his username
     let tweets = await rettiwt.tweets.getTweets(
       {
-        // hashtags: ["twitter"],
         fromUsers: [username],
         startDate: lastScanned.toISOString().split("T")[0],
       },

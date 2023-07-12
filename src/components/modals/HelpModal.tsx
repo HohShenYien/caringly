@@ -3,6 +3,28 @@ import ModalLayout from "./ModalLayout";
 import { Carousel, Embla, useAnimationOffsetEffect } from "@mantine/carousel";
 import { useCallback, useState } from "react";
 import Button from "../buttons/Button";
+import Image from "next/image";
+
+const howItWorks = [
+  {
+    image: "/guides/step-1.jpg",
+    description:
+      "Create a new monitoring user for your loved one using the button on bottom left.",
+    title: "Create",
+  },
+  {
+    image: "/guides/step-2.png",
+    description:
+      "Copy the profile URL of the social media account of your loved one",
+    title: "Copy",
+  },
+  {
+    image: "/guides/step-3.png",
+    description:
+      "We will send an alert email if any of the posts is found to be depressive or suicidal.",
+    title: "Alert",
+  },
+];
 
 const HelpModal: MantineModal = () => {
   const TRANSITION_DURATION = 200;
@@ -33,29 +55,25 @@ const HelpModal: MantineModal = () => {
         getEmblaApi={setEmbla}
         withControls={false}
         draggable={false}
-        height={400}
+        height={440}
       >
-        <Carousel.Slide>
-          <div>
-            <img
-              src="https://design.mindsphere.io/patterns-chapters/guided-tour/images/guided-tour-usage-general-tour-success-02.png"
-              alt="text"
-            />
-            <div className="px-4 py-2">Hello</div>
-          </div>
-        </Carousel.Slide>
-        <Carousel.Slide>
-          <img
-            src="https://design.mindsphere.io/patterns-chapters/guided-tour/images/guided-tour-usage-general-tour-success-02.png"
-            alt="text"
-          />
-        </Carousel.Slide>
-        <Carousel.Slide>
-          <img
-            src="https://design.mindsphere.io/patterns-chapters/guided-tour/images/guided-tour-usage-general-tour-success-02.png"
-            alt="text"
-          />
-        </Carousel.Slide>
+        {howItWorks.map((data, idx) => (
+          <Carousel.Slide key={idx}>
+            <div>
+              <Image
+                src={data.image}
+                alt="text"
+                height="400"
+                width="400"
+                className="h-[340px] w-full object-cover"
+              />
+              <div className="px-4 pt-1">
+                <h3 className="text-xl font-semibold">{data.title}</h3>
+                <div className="text-zinc-500">{data.description}</div>
+              </div>
+            </div>
+          </Carousel.Slide>
+        ))}
       </Carousel>
       <div className="flex items-center space-x-4 px-4 py-2">
         <div className="flex-1">

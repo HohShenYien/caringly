@@ -24,10 +24,10 @@ const DeleteUserConfirmModal: MantineModal<UserAccountProps> = ({
     });
   };
   return (
-    <ModalLayout title="Delete User" minHeight={false}>
+    <ModalLayout title="Delete Account" minHeight={false}>
       <div className="flex flex-1 flex-col justify-between space-y-2">
         <div className="mb-8">
-          Are you sure to delete the user{" "}
+          Are you sure to delete the account{" "}
           <span className="font-semibold">{user.name}</span>?
         </div>
 

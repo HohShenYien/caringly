@@ -11,12 +11,6 @@ interface WatchMeta {
 
 const watchData: WatchMeta[] = [
   {
-    logo: "/icons/facebook.png",
-    key: "facebook",
-    title: "Facebook",
-    color: "bg-blue-200 shadow-blue-300/50",
-  },
-  {
     logo: "/icons/instagram.png",
     key: "instagram",
     title: "Instagram",
@@ -27,6 +21,12 @@ const watchData: WatchMeta[] = [
     key: "twitter",
     title: "Twitter",
     color: "bg-sky-200 shadow-sky-300/50",
+  },
+  {
+    logo: "/icons/facebook.png",
+    key: "facebook",
+    title: "Facebook (Soon)",
+    color: "bg-blue-200 shadow-blue-300/50",
   },
 ];
 

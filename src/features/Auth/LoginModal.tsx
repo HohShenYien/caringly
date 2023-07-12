@@ -75,12 +75,6 @@ const LoginModal: MantineModal<LoginModalProps> = () => {
               Log in
             </Button>
           </form>
-          <Divider label="OR" labelPosition="center" className="!my-6" />
-          <div>
-            <Button fullWidth className="py-1" variant="outline">
-              Continue with Facebook
-            </Button>
-          </div>
           <div className="!mt-6 text-center text-sm">
             <p className="text-center text-zinc-500">
               {"Don't have an account yet?"}

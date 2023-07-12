@@ -44,7 +44,7 @@ const EditAccountModal: MantineModal<EditAccountModalProps> = ({
     });
   };
   return (
-    <ModalLayout title="Edit Account">
+    <ModalLayout title="Edit Social Media Account">
       <form
         className="flex flex-1 flex-col justify-between space-y-2"
         onSubmit={form.onSubmit(submitForm)}
@@ -57,7 +57,7 @@ const EditAccountModal: MantineModal<EditAccountModalProps> = ({
         <TextInput
           label="Social Media URL"
           className="flex-1"
-          placeholder="https://facebook.com/u/john.doe"
+          placeholder="https://twitter.com/ShenYien212"
           variant="filled"
           {...form.getInputProps(`url`)}
         />

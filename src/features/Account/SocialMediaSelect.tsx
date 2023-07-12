@@ -10,20 +10,9 @@ interface SocialMediaItem extends React.ComponentPropsWithoutRef<"div"> {
 
 const socialMedia: SocialMediaItem[] = [
   {
-    image: "/icons/facebook.png",
-    label: "Facebook",
-    value: "facebook",
-  },
-
-  {
     image: "/icons/instagram.png",
     label: "Instagram",
     value: "instagram",
-  },
-  {
-    image: "/icons/reddit.png",
-    label: "Reddit",
-    value: "reddit",
   },
   {
     image: "/icons/twitter.png",
@@ -57,7 +46,7 @@ const SocialMediaSelect = ({
   ...props
 }: SocialMediaSelectProps) => {
   const selectedIcon = useMemo(() => {
-    const cur = props.value ?? "facebook";
+    const cur = props.value ?? "twitter";
     const selected = socialMedia.find((val) => val.value == cur)!;
     return (
       <Image src={selected.image} alt={selected.label} width="20" height="20" />
@@ -69,7 +58,7 @@ const SocialMediaSelect = ({
       label={withLabel ? "Type" : undefined}
       itemComponent={SelectItem}
       data={socialMedia}
-      defaultValue="facebook"
+      defaultValue="twitter"
       icon={selectedIcon}
       variant="filled"
       {...props}

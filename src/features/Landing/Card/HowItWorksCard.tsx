@@ -1,22 +1,25 @@
 import Image from "next/image";
 
-const HowItWorksCard = () => {
+interface HowItWorksCardProps {
+  image: string;
+  title: string;
+  description: string;
+}
+
+const HowItWorksCard = ({ image, title, description }: HowItWorksCardProps) => {
   return (
     <div className="px-4">
-      <div className="mb-4 flex flex-col items-center justify-center space-y-2">
+      <div className="flex flex-col items-center justify-center">
         <Image
-          src="/img/hero/depression.png"
+          src={image}
           height="250"
           width="250"
           alt=""
-          className="rounded-xl"
+          className="mb-2 h-[180px] w-[250px] rounded-xl border-2 border-solid border-gray-200 object-cover shadow-sm"
         />
-        <h3 className="text-xl font-semibold">Search</h3>
+        <h3 className="text-xl font-semibold">{title}</h3>
       </div>
-      <div className="text-zinc-500">
-        You will be notified if anyone from your list shows signs of depression
-        and suicidal thoughts.
-      </div>
+      <div className="px-8 text-center text-zinc-500">{description}</div>
     </div>
   );
 };
