@@ -46,7 +46,7 @@ const AxiosInterceptor = ({ children }: { children: JSX.Element }) => {
       apiClient.interceptors.response.eject(interceptor);
       apiClient.interceptors.request.eject(reqInterceptor);
     };
-  }, [router]);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
