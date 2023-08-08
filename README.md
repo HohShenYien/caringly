@@ -24,4 +24,4 @@ Its goal is to allow users to **monitor** the social media posts of those they c
 - ✉ Alerts users using **Email**
 - 🔒 Basic **Authentication** using JWT
 
-Check out the backend codes at [caringly-core](https://github.com/HohShenYien/caringly-core)https://github.com/HohShenYien/caringly-core
+Check out the backend codes at [caringly-core](https://github.com/HohShenYien/caringly-core)
